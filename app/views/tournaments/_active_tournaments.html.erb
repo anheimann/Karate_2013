@@ -1,0 +1,38 @@
+<% if @active_tournaments.empty? %>
+	<p><em>No tournaments currently in the system.</em></p>
+<% else %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="centered">Date</th>
+				<th width="250">Name</th>
+				<th class="centered">Minimum Rank</th>
+				<th class="centered">Maximum Rank</th>
+				<th class="centered">Sections</th>
+				<th class="centered">Students Registered</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @active_tournaments.reverse.each do |tournament| %>
+            <tr>
+				<td><%= tournament.date.strftime("%m/%d/%Y") %></td>
+				<td><%= link_to tournament.name, tournament_path(tournament) %></td>
+				<td><%= rank_name(tournament.min_rank) %></td>
+				<td><%= tournament.max_rank.nil? ? "Senior Master" : rank_name(tournament.max_rank) %></td>
+				<td class="centered"><%= tournament.sections.size %></td>
+				<td class="centered"><%= tournament.students.size %></td>
+				<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+					<td><%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_tournament_path(tournament), :class => 'btn btn-mini btn-warning' %></td>
+					<td><%= link_to raw("<i class='icon-repeat'></i> Clone"), clone_tournament_path(tournament), :class => 'btn btn-mini btn-success' %></td>
+				<% end %>
+			</tr>
+		  <% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<div class="digg_pagination">
+	<!-- <div class="page_info"><%= page_entries_info @active_tournaments %></div>		-->
+	<%= will_paginate @active_tournaments, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>
+

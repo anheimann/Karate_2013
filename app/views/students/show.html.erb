@@ -1,0 +1,35 @@
+<% if logged_in? %>
+  <div class="row">
+	<div class="span4">
+		<%= render :partial => "student_details" %>
+		<br>
+		<%= render :partial => "dojo_history" %>
+	</div>
+
+	<div class="span8">
+		<%# render :partial => "upcoming_activities" %>		<!-- went 1 step further with "eligible_upcoming_sections" partial -->
+		<%= render :partial => "eligible_upcoming_sections" %>
+		<%# if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+			<!-- the following line of code displays eligible sections for upcoming tournament(s) with ids 
+				 but want to display user-friendly information, such as tournament name and date.  Prof. H
+				 said the Section.to_s method was written as part of phase3 solution for this purpose -->
+			<%# render :partial => "quick_register_section_for_student" %>
+		<%# end %>
+		<br>
+		<%= render :partial => "past_activities" %>
+	</div>
+  </div>
+
+  <div class="form-actions">
+	<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+	<%= link_to raw("<i class='icon-list'></i> Display All Students"), students_path, :class => 'btn btn-info'  %>&nbsp;&nbsp;
+	<% end %>
+	<% if logged_in? && ((current_user.role? :admin) || (current_user.role? :member)) %>
+	<!-- admin and member for him/herself only: -->
+		<%= link_to raw("<i class='icon-pencil'></i> Edit #{@student.proper_name}"), edit_student_path(@student), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+	<% end %>
+	<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+		<%= link_to raw("<i class='icon-remove icon-white'></i> Delete #{@student.proper_name}"), student_path(@student), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+	<% end %>
+  </div>
+<% end %>

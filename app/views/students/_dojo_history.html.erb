@@ -1,0 +1,45 @@
+<h3>Dojo History &nbsp;&nbsp; 
+	<% if (current_user.role? :admin) %>
+		<%= link_to(raw("<i class='icon-resize-horizontal icon-white'></i> Transfer"), new_dojo_student_path(:student_id => @student.id, :from => 'student'), :class => 'btn btn-primary') %>
+	<% end %>
+</h3>
+
+<% if @dojo_history.empty? %>
+	&nbsp;&nbsp;<em>None at this time</em>
+<% else %>
+	<table class="table table-striped">
+	  <thead>
+		<tr>
+			<th>Dojo</th>
+			<th class="centered">Dates</th>
+			<th></th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<% @dojo_history.each do |membership| %>
+          <tr>
+			<% unless (!logged_in? && !dojo.active) %>
+				<td><%= link_to membership.dojo.name, dojo_path(membership.dojo) %></td>
+					<td class="centered"><%= membership.start_date.strftime("%m/%d/%y") %> -
+						<%= membership.end_date.nil? ? "present" : membership.end_date.strftime("%m/%d/%y") %></td>
+					<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only -->
+					<td class="centered">
+					<%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_dojo_student_path(membership), :class => 'btn btn-mini btn-warning' %>
+					</td>
+				<% end %>
+			<% end %>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+<% end %>
+<br>
+
+<div class="digg_pagination">
+  <div clas="page_info">
+    <%# page_entries_info @student.dojos %>
+  </div>
+  <%# will_paginate @student.dojos, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>
+<br>
+

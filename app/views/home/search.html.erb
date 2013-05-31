@@ -1,0 +1,17 @@
+<h1>Search</h1>
+<br />
+
+<h4>Your search for term <em>'<%= @query %>'</em> resulted in </h4>
+<p class="small">&nbsp;</p>
+
+<% if @students.empty? %>
+	<h4>no match.</h4>
+<% else %>
+	<h4>a match with the following student(s):</h4>
+	<ul>
+		<% for student in @students do %>
+			<li><%= link_to student.name, student_path(student) %></li>
+		<% end %>
+	</ul>
+<% end %>
+<br/>

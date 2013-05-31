@@ -1,0 +1,16 @@
+<%= simple_form_for @registration, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Registration</legend>
+
+		<%= f.input :section_id, :label => "Section", :collection => get_section_options, :prompt => "Select..." %>
+		<%= f.input :student_id, :collection => Student.active.alphabetical.all, :prompt => "Select..."  %>
+		<%= f.input :date, :start_year => Date.today.year, :end_year => Date.today.year + 5, :order => [:month, :day, :year] %>
+		<%= f.input :fee_paid %>
+		<%= f.input :final_standing %>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', sections_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

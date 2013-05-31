@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="span5">
+		<%= render :partial => "dojo_details" %>
+		<br />
+		<% if logged_in? && (current_user.role? :admin) %>            <!-- admin only: -->
+  	  <br /><%= link_to(raw("<i class='icon-resize-horizontal icon-white'></i> Transfer Student"), new_dojo_student_path(:dojo_id => @dojo.id, :from => 'dojo'), :class => 'btn btn-primary') if @dojo.active %>
+  	<% end %>
+	</div>
+
+	<div class="span6">             
+    <% if logged_in? && (current_user.role? :admin) %>            <!-- admin only: -->
+        <%= render :partial => "current_memberships" %>
+    <% elsif logged_in? && (current_user.role? :member) %>
+      <%= render :partial => "current_memberships" %>             <!-- member of this dojo only: -->
+    <% end %>
+	</div>
+</div>
+
+<div class="form-actions">
+	<%= link_to raw("<i class='icon-list'></i> Display All Dojos"), dojos_path, :class => 'btn btn-info'  %>&nbsp;&nbsp;
+  <% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+	<%= link_to raw("<i class='icon-pencil'></i> Edit #{@dojo.name}"), edit_dojo_path(@dojo), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+	<%= link_to raw("<i class='icon-remove icon-white'></i> Delete #{@dojo.name}"), dojo_path(@dojo), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
+</div>

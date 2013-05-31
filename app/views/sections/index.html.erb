@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="span11">
+		  <%= render :partial => "active_sections_list" %>
+		`<br />
+		  <%= render :partial => "inactive_sections_list" %>
+	</div>
+<!-- this function is not being used:
+	<div class="span4">
+		<%# simple_form_for @tournament, :html => { :class => 'form' } do |f| %>
+				<%# f.input :name, :label => 'Choose a Tournament:', :collection => get_tournament_options, :prompt => "Select..." %>
+		<%# end %>
+	</div>				-->
+</div>
+
+<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+	<%= link_to raw("<i class='icon-plus icon-white'></i> New Section"), new_section_path, :class => 'btn btn-primary', :id => 'Create Section' %>
+<% end %>

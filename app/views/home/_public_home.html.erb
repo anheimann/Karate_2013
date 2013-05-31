@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="span8">
+		<h1>A&M Karate Tournament</h1>
+		<br />
+		<p><em>Welcome!!</em> This website is dedicated to provide information about karate students, 
+		   events and related sections in the greater Pittsburgh area.  For further information, 
+		   please click on a link.</p> 
+
+		<div class="well8">
+			<% if @upcoming_tournament.empty? %>
+				<p>To be announced... </p>
+			<% else %>
+				<p><em>*** Upcoming Tournament ***</em></p>
+				<br />
+				<h2><%= link_to @upcoming_tournament[0].name, tournament_path(@upcoming_tournament[0]) %></h2>
+				<p><%= @upcoming_tournament[0].date.strftime("%B %d, %Y") %></p>
+				<p><%= rank_name(@upcoming_tournament[0].min_rank) %> to 
+					<%= @upcoming_tournament[0].max_rank.nil? ? "Senior Master" : rank_name(@upcoming_tournament[0].max_rank) %></p>
+				<% if @upcoming_tournament[0].sections.size == 1 %>
+					<p><%= @upcoming_tournament[0].sections.size %> section</p>
+				<% else %>
+					<p><%= @upcoming_tournament[0].sections.size %> sections</p>
+				<% end %>
+				<% if @upcoming_tournament[0].students.size > 5 %>
+					<p><%= @upcoming_tournament[0].students.size %> registrations so far!</p>
+				<% end %>
+				<br />
+			<% end %>
+		</div>
+
+	</div>
+
+	<div class="span4">
+		<div class="well7">		<!-- was originally 'well' -->
+			<!-- picture here -->
+			<%= image_tag 'chinese.jpeg' %>
+		</div>
+	</div>
+</div>
+<br>

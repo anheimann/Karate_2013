@@ -1,0 +1,28 @@
+<!-- want a drop down menu (collection menu?) to select one, and only one, particular tournament -->
+<table class="table table-striped">
+  <thead>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Rank(s)</th>
+		<th></th>
+	</tr>
+  </thead>
+  <tbody>
+	<% @upcoming_tournaments.each do |tournament| %>
+	  <tr>
+		<td><%= link_to tournament.name, tournament_path(tournament) %></td>
+		<td><%= tournament.date.strftime("%m/%d/%Y") %></td>
+		<td><%= rank_name(tournament.min_rank) %> - 
+			<%= tournament.max_rank.nil? ? "Senior Master" : rank_name(tournament.max_rank) %></td>
+	  </tr>
+	<% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+	<div clas="page_info">
+		<%= page_entries_info @upcoming_tournaments %>
+	</div>
+	<%= will_paginate @upcoming_tournaments, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>

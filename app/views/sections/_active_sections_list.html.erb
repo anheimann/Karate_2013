@@ -1,0 +1,39 @@
+<h3>Current Sections</h3>
+
+<table class="table table-striped">
+  <thead>
+	<tr>
+		<th>Event</th>
+		<th>Tournament</th>
+		<th class="centered">Rank(s)</th>
+		<th>Age(s)</th>
+		<th>Registrants</th>
+        <th>&nbsp;</th>
+	</tr>
+  </thead>
+  <tbody>
+	<% @active_sections.each do |section| %>
+	  <tr>
+		<td><%= link_to section.event.name, section_path(section) %></td>
+		<td><%= link_to section.tournament.name, tournament_path(section.tournament) %></td>
+		<td><%= rank_range_for(section) %></td>
+		<td><%= age_range_for(section) %></td>
+		<td class="centered"><%= section.registrations.size %></td>
+		<% if !section.tournament.active %>		<!-- must activate tournament first -->
+			<td><em>inactive tournament</em></td>
+		<% elsif !section.event.active %>		<!-- must activate event first -->
+			<td><em>inactive event</em></td>
+		<% else %>
+			<td><%= link_to raw("<i class='icon-file'></i> Details"), section_path(section), :class => 'btn btn-mini btn-info' %>
+				<%= link_to raw("<i class='icon-pencil'></i> Edit"), edit_section_path(section), :class => 'btn btn-mini btn-warning' %>
+			</td>
+		<% end %>
+	  </tr>
+	<% end %>
+  </tbody>
+</table>
+
+<div class="digg_pagination">
+	<!--	<div class="page_info"><%= page_entries_info @active_sections %></div>		-->
+	<%= will_paginate @active_sections, :param_name => 'active_page', :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+</div>

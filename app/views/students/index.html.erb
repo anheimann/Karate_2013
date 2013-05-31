@@ -1,0 +1,28 @@
+<script>
+	$(function() {
+		$("#accordion").accordion(
+		  {collapsible: true, active: false}
+		);
+	});
+</script>
+<!-- jQuery accordion function in javascripts/aplication.js file does not work but does work by including the script above -->
+
+<h4>Select a group for listing:</h4>
+<div class="row">
+  <div class="span10">
+	<div id="accordion">
+		<%= render :partial => "active_students" %>
+		<%= render :partial => "by_age_students" %>
+		<%= render :partial => "by_rank_students" %>
+		<%= render :partial => "dan_students" %>
+		<%= render :partial => "gup_students" %>
+		<%= render :partial => "inactive_students" %>
+		<%= render :partial => "junior_students" %>
+		<%= render :partial => "senior_students" %>
+		<%= render :partial => "waivers_needed_students" %>
+	</div>
+  </div>
+</div>
+<br>
+
+<%= link_to raw("<i class='icon-plus icon-white'></i> New Student"), new_student_path, :class => 'btn btn-primary', :id => 'Create Student' %>

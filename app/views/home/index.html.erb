@@ -1,0 +1,7 @@
+<% if (logged_in? && current_user.role?(:admin)) %>
+  <%= render :partial => "admin_home" %>
+<% elsif (logged_in? && current_user.role?(:member)) %>
+	<%= render :partial => "member_home" %>
+<% else %>
+	<%= render :partial => "public_home" %>
+<% end %>

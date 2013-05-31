@@ -1,0 +1,41 @@
+<% if @section_students.empty? %>
+  <p>&nbsp;&nbsp;<em>None at this time</em></p>
+  <p>&nbsp;</p>
+  
+<% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+		<th>Rank</th>
+		<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+			<th>Age</th>
+			<th>&nbsp;</th>
+		<% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @section_students.each do |student| %>
+        <tr>
+			<% if logged_in? && (current_user.role? :admin) %>
+				<td><%= link_to student.name, student_path(student) %></td>
+			<% else %>
+				<td><%= student.name %></td>
+			<% end %>
+			<td><%= rank_name(student.rank) %></td>
+			<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+				<td class="centered"><%= student.age %></td>
+				<td><%= link_to raw("<i class='icon-remove'></i>"), registration_path(Registration.for_student(student.id).for_section(@section.id).first), :method => 'delete', :confirm => 'Are you sure?' %>
+			<% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+	<div class="digg_pagination">
+		<!--	<div class="page_info"><%# page_entries_info @section_students %></div>		-->	
+		<%= will_paginate @section_students, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+	</div>	
+	
+<% end %>

@@ -1,0 +1,19 @@
+<div class="row">
+	<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+		<div class="span9">
+			<h3>Active Tournaments</h3>
+			<%= render :partial => "active_tournaments" %>
+			<br>
+			<h3>Inactive Tournaments</h3>
+			<%= render :partial => "inactive_tournaments" %>
+			<br>
+			<%= link_to raw("<i class='icon-plus icon-white'></i> New Tournament"), new_tournament_path, :class => 'btn btn-primary', :id => 'Create Tournament' %>
+		</div>
+
+	<% else %>												<!-- members & public -->
+		<div class="span9">
+			<h3>List of Tournaments</h3>
+			<%= render :partial => "active_tournaments" %>
+		</div>
+	<% end %>
+</div>

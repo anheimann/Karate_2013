@@ -1,0 +1,46 @@
+<div class="well1">
+	<h3>Students
+		<p class="ident pull-right">
+		<%= link_to raw("<i class='icon-plus icon-white'></i> New Student"), new_student_path, :class => 'btn btn-primary', :id => 'Create Student' %></p>
+	</h3>
+	<br>
+
+	<!-- autocomplete attempt -->
+	<!-- <div class="ui-widget">
+		<label for="searchstudent">Search student: </label><input id="searchstudent" />
+	</div>			-->
+
+	<%= form_tag(search_path) do %>
+		<%= text_field_tag('query', '', :size => 12) %>
+		<%= submit_tag('Find') %>
+	<% end %>
+	
+	<!-- decided to drop the following table -->
+	<!-- <%# unless @active_students.empty? %>
+		<table>
+		  <thead>
+			<tr>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Rank</th>
+				<th>Registrations</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			  <%# @active_students.each do |student| %>
+				<%# if student.registrations.size > 0 %>
+				  <tr>
+					<td><%# link_to student.name, student_path(student) %></td>
+					<td><%# student.age %></td>
+					<td><%# rank_name(student.rank) %></td>
+					<td class="centered"><%# student.registrations.size %></td>
+				  </tr>
+				<%# end %>
+			  <%# end %>
+		  </tbody>
+		</table>
+		<span class="small">
+			<%# will_paginate @active_students, :param_name => "student_page", :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+		</span>
+	<%# end %>			-->
+</div>

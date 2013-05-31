@@ -1,0 +1,34 @@
+<div class="well3">
+	<h3>Dojos
+		<p class="ident pull-right">
+		<%= link_to raw("<i class='icon-plus icon-white'></i> New Dojo"), new_dojo_path, :class => 'btn btn-primary', :id => 'Create Dojo' %></p>
+	</h3>
+	<br>
+	<% unless @active_dojos.empty? %>
+		<table>
+		  <thead>
+			<tr>
+				<th width="130">Name</th>
+				<th width="1"></th>
+				<th>Location</th>
+				<th>Members</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			  <% @active_dojos.each do |dojo| %>
+				<tr>
+					<td><%= link_to dojo.name, dojo_path(dojo) %></td>
+					<td></td>
+					<td><%= dojo.city %>, <%= dojo.state %></td>
+					<td class="centered"><%= dojo.current_students.size %></td>
+				</tr>
+			  <% end %>
+		  </tbody>
+		</table>
+		<br>
+		<span class="small">
+			<%= will_paginate @active_dojos, :param_name => 'dojo_page', :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+		</span>
+		
+	<% end %>
+</div>

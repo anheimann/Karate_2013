@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="span7">
+		<h3>Welcome, <%= role_name(current_user.role) %>&nbsp;<%=current_user.student.proper_name %></h3>
+		<p>This is the administrator's page for  A &amp; M Karate Tournaments, hosted by the 
+	    A &amp; M Karate School.</p>
+		<br>
+		<h4 class="well9">To register a student, first select a section.</h4>
+	</div>
+
+	<div class="span5">
+		<!--  <div class="well">
+			picture here
+		</div>		-->
+		<%= render :partial => "admin_dash_student" %>
+	  <p class="ident pull-right">
+    <%= link_to(raw("<i class='icon-resize-horizontal icon-white'></i> Transfer Memberhip"), new_dojo_student_path(), :class => 'btn btn-primary') %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span7">
+		<%= render :partial => "admin_dash_tournament" %>
+	</div>
+
+	<div class="span5">
+		<%= render :partial => "admin_dash_dojo" %>
+	</div>
+</div>
+<br>

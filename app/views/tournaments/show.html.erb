@@ -1,0 +1,43 @@
+<script>
+	$(function() {
+		$("#accordion").accordion(
+		  {collapsible: true, active: false}
+		);
+	});
+</script>
+<!-- jQuery accordion function in javascripts/aplication.js file does not work but does work by including the script above -->
+
+<div class="row">
+	<div class="span4">
+		<%= render :partial => "tournament_details" %>
+  		<br />
+  		<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+  			<% if @tournament.date >= Date.today %>
+  				<h4 class="well9">To register a student, first select a section.</h4>
+  				<br />
+  				<%= link_to raw("<i class='icon-plus icon-white'></i> New Section"), new_section_path(:tournament_id => @tournament.id), :class => 'btn btn-primary', :id => 'Create Section' %>
+      	<% end %>
+  		<% end %>
+  	</div>
+  <div class="span1"></div>
+	<div class="span7">
+    <div id="accordion">
+      <%= render :partial => "tsections" %>
+      <%= render :partial => "tregistrations" %>
+      <% if logged_in? && (current_user.role? :admin) %>
+        <%= render :partial => "tunpaids" %>
+      <% end %>
+    </div>
+	</div>
+</div>
+
+<div class="form-actions">
+  <%= link_to raw("<i class='icon-list'></i> Display All Tournaments"), tournaments_path, :class => 'btn btn-info'  %>&nbsp;&nbsp;
+  <% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+	<%= link_to raw("<i class='icon-pencil'></i> Edit #{@tournament.name}"), edit_tournament_path(@tournament), :class => 'btn btn-warning' %>&nbsp;&nbsp;
+	<% if @tournament.active %>
+		<%= link_to raw("<i class='icon-repeat'></i> Clone #{@tournament.name}"), clone_tournament_path(@tournament), :class => 'btn btn-success' %>
+	<% end %>
+	<%= link_to raw("<i class='icon-remove icon-white'></i> Delete #{@tournament.name}"), tournament_path(@tournament), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+  <% end %>
+</div>

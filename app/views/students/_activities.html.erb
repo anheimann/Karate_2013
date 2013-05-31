@@ -1,0 +1,25 @@
+<h3>Tournament Activity</h3>
+
+<% if @registrations.empty? %>
+	&nbsp;&nbsp;<em>None at this time</em>
+<% else %>
+	<table class="table table-striped">
+	  <thead>
+		<tr>
+			<th>Date</th>
+			<th>Tournament</th>
+			<th class="centered">Event</th>
+    	</tr>
+	  </thead>
+	  <tbody>
+		<% @registrations.each do |registration| %>
+			<tr>
+				<td><%= registration.tournament.date.strftime("%m/%d/%Y") %></td>
+				<td><%= registration.tournament.name %></td>
+				<td><%= link_to registration.event.name, section_path(registration.section.id) %></td>
+			</tr>
+		<% end %>
+	  </tbody>
+	</table>
+	<%= will_paginate @registrations, :previous_label => "Previous", :next_label => "Next" %>
+<% end %>

@@ -1,0 +1,28 @@
+<div class="well2">
+	<h3>Tournament Details</h3>
+
+	<p><b>Name: </b><%= @tournament.name %></p>	
+	<p><b>Date: </b><%= @tournament.date.strftime("%m/%d/%Y") %></p>	
+	<p><b>Ranks: </b><%= rank_name(@tournament.min_rank) %> - 	
+	
+		<%= @tournament.max_rank.nil? ? "Senior Master" : rank_name(@tournament.max_rank) %></p>
+	<% if logged_in? && (current_user.role? :admin) %>
+		<p><b>Active: </b><%= @tournament.active ? "Yes" : "No" %></p>	
+	<% end %>
+	<p><b>Total Sections: </b><%= @tournament.sections.size %></p>	
+	<p><b>Total Registrations: </b><%= @tournament.registrations.size %></p>	
+
+<!-- a different presentation style that was considered but not activated:
+	<table class="vertical">
+		<tr><td><b>Name</b></td>&nbsp;<td><%= @tournament.name %></td></tr>
+		<tr><td><b>Date</b></td>&nbsp;<td><%= @tournament.date.strftime("%m/%d/%Y") %></td></tr>
+		<tr><td><b>Minimum Rank</b></td>&nbsp;<td><%= rank_name(@tournament.min_rank) %></td></tr>
+		<tr><td><b>Maximum Rank</b></td>&nbsp;<td><%= @tournament.max_rank.nil? ? "Senior Master" : rank_name(@tournament.max_rank) %></td></tr>
+		<%# if logged_in? && (current_user.role? :admin) %>
+		<tr><td><b>Active</b></td>&nbsp;<td><%= @tournament.active ? "Yes" : "No" %></td></tr>
+		<%# end %>
+		<tr><td><b>Total Sections</b></td>&nbsp;<td><%= @tournament.sections.size %></td></tr>
+		<tr><td><b>Total Registrations</b></td>&nbsp;<td><%= @tournament.registrations.size %></td></tr>
+	</table>				-->
+	<br>
+</div>	

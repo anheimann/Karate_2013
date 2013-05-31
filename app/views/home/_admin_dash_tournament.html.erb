@@ -1,0 +1,54 @@
+<div class="well2">
+	<h3>Tournaments
+		<p class="ident pull-right">
+		<%= link_to raw("<i class='icon-plus icon-white'></i> New Tournament"), new_tournament_path, :class => 'btn btn-primary', :id => 'Create Tournament' %></p>
+	</h3>
+	<br>
+	<% unless @upcoming_tournaments.empty? %>
+		<table>
+		  <thead>
+			<tr>
+				<th width="90">Date</th>
+				<th width="280">Name</th>
+				<th>Registrations</th>
+				<th></th>
+			</tr>
+		  </thead>
+		  <tbody>
+			  <% @upcoming_tournaments.each do |t| %>
+				<tr>
+					<td><%= t.date.strftime("%m/%d/%Y") %></td>
+					<td><%= link_to t.name, tournament_path(t) %></td>
+					<td class="centered"><%= t.registrations.size %></td>
+					<td><%= link_to raw("<i class='icon-repeat'></i> Clone"), clone_tournament_path(t), :class => 'btn btn-mini btn-success' %></td>
+				</tr>
+			  <% end %>
+		  </tbody>
+		</table>
+		<br>
+	<% end %>
+	
+	<% unless @past_tournaments.empty? %>
+		<table>
+		  <thead>
+			<tr>
+				<th width="90">Date</th>
+				<th width="280">Name</th>
+				<th>Registrations</th>
+				<th></th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<% @past_tournaments.reverse.each do |t| %>
+				<tr>
+					<td><%= t.date.strftime("%m/%d/%Y") %></td>
+					<td><%= link_to t.name, tournament_path(t) %></td>
+					<td class="centered"><%= t.registrations.size %></td>
+					<td><%= link_to raw("<i class='icon-repeat'></i> Clone"), clone_tournament_path(t), :class => 'btn btn-mini btn-success' %></td>
+				</tr>
+			<% end %>
+		  </tbody>
+		</table>
+	<% end %>
+</div>
+

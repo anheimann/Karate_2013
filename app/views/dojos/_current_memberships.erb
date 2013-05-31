@@ -1,0 +1,43 @@
+<h3>Current Members</h3>
+<div>
+  <% if @current_memberships.empty? %>
+  	<% if logged_in? && (current_user.role? :admin) %>
+    &nbsp;&nbsp;<em>None at this time</em>
+  	<% else %>		<!-- member who does not belong to this dojo only: -->
+    &nbsp;&nbsp;<em>You are not authorized to view this information.</em>
+  	<% end %>
+  <% else %>
+  	<table class="table table-striped">
+  	  <thead>
+  		<tr>
+  			<th>Student</th>
+  			<% if logged_in? && (current_user.role? :admin) %>
+  				<th>Age</th>
+  			<% end %>
+  			<th>Rank</th>
+  			<th></th>
+      	</tr>
+  	  </thead>
+  	  <tbody>
+  		<% @current_memberships.each do |membership| %>
+  			<tr>
+  				<% if logged_in? && (current_user.role? :admin) %>
+  					<td><%= link_to membership.student.name, student_path(membership.student) %></td>
+  					<td><%= membership.student.date_of_birth.nil? ? "---" : membership.student.age %></td>
+  				<% elsif logged_in? && (current_user.role? :member) %>
+  					<td><%= membership.student.name %></td>
+  				<% end %>
+  				<td><%= rank_name(membership.student.rank) %></td>
+  				<td><%= link_to(raw("<i class='icon-resize-horizontal icon-white'></i> Transfer"), new_dojo_student_path(:student_id => membership.student_id, :from => 'student'), :class => 'btn btn-mini btn-primary') %></td>
+  			</tr>
+  		<% end %>
+  	  </tbody>
+  	</table>
+  	<br />
+  
+  	<div class="digg_pagination">
+      	<!-- <div class="page_info"><%= page_entries_info @current_memberships %></div>		-->
+      	<%= will_paginate @current_memberships, :param_name => 'current_m_page', :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,162 @@
+html { background-color:transparent; }	/* overwrites declaration on line 63 in bootstrap.css which had gray color */
+
+.navbar  {
+	padding-left: 2px;
+}
+.navbar	.brand {
+	color:#C30000;					/* 'darkcherryred' color */
+	text-shadow: none;				/* overwrites declaration on line 3488 in boostrap.css which had a gray color */;
+}
+.navbar .nav > li > a:hover {
+     color:#C30000;					/* 'darkcherryred' color */
+	 text-decoration: underline;
+}
+.navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+	width: 100%;
+}
+
+.navbar-inner { 					/* for the box inside the navbar */
+	color:#000000;					 /* 'black' color */
+	padding-left: 0px;
+	padding-right: 0px; }			
+
+.navbar-inner a.brand { margin-left: 5px; }
+
+/* In bootstrap.css, I modified line 3659 which originally had gray color for the text-shadow to my navbar links */
+.navbar .nav > li > a {
+	color: #C30000;					/* 'darkcherryred' color */
+}  
+
+/* In bootstrap.css, I modified line 2303 which originally had blue color for the clone button */
+
+#footer {
+	margin-top: 15px;
+	padding-top: 10px;
+/*	background-color:#E6E6E6;			    gray color */
+	background-color:transparent;
+	text-align: center;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#copy {
+	font-size: 85%;
+	text-align: center;
+}
+
+.small {
+	font-size: 70%;
+}
+	
+.supertiny {
+	font-size: 5px;
+}
+
+/* hexadecimal source: www.december.com/html/spec/colorhex.html */
+.well1 {								/* for Admin's dashboard_student */
+	background-color:#E0FFFF;			/* 'lightcyan' color */
+	padding-left: 5px;
+}
+
+.well2 {								/* for Admin's dashboard_tournament */
+	background-color:#E6E6FA;			/* 'lavender' color */
+	padding-left: 5px;
+}
+
+.well3 {								/* for Admin's dashboard_dojo */
+	background-color:#FFF68F;			/* 'khaki1', or yellow color */
+	padding-left: 5px;
+}
+
+.well7 {								/* for drawing on public dashboard */
+	background-color:gold;
+	border-radius: 18px 18px 18px 18px;	/* rounded corners */
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin-bottom: 20px;
+	min-height: 20px;
+	padding: 29px; 
+}
+	
+.well8 {								/* tournament promotional ad for public dashboard */
+	background-color:gold;
+	color:#339988;						/* green color  */
+	font-family: Noteworthy, Lucida Calligraphy, Times;
+	font-size: 170%;
+	text-align: center;	
+	padding: 40px 15px 20px 15px;
+	margin-top: 40px;
+	margin-right:20px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	border-width: thick;
+	border-style: outset;
+}
+
+.well9 {								/* message about how to register a student, i.e. in Tournament Details page */
+	color:#339988;						/* green color */
+	font-size: 130%;
+}
+
+.well li {
+	font-size: 130%;
+	line-height: 1.5;
+}
+
+select.date { width: 90px; }
+select.time { width: 90px; }
+
+th.centered {  							/* th cell that has class 'centered' */
+	text-align: center;
+}
+
+td.centered {  							/* td cell that has class 'centered' */
+	text-align: center;
+}
+
+.form-actions {
+	background-color: #FFF;
+}
+
+.form-actions-min {
+	background-color: #FFF;
+	border: none;
+	padding: 10px 10px 10px 180px;
+	/*padding-left: 180px;*/
+}
+
+.pagination ul > li > a, .pagination ul > li > span {
+	border-left-width: 1px;
+}
+
+.glow {
+	background-color:yellow;
+}
+
+/*** TEMP FIX ON BOOTSTRAP ICONS ***/
+.icon-th-list {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-file {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-list {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-pencil {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-repeat {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-remove {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-plus {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-arrow-left {
+	background-image: url("./img/glyphicons-halflings.png");
+}
+.icon-white {
+	background-image: url("./img/glyphicons-halflings-white.png");
+}

@@ -1,0 +1,43 @@
+<%= simple_nested_form_for @student, :html => { :class => 'form-horizontal' } do |student_form| %>
+<div class="row">
+	<div class="span6">
+		<fieldset>
+			<legend><%= controller.action_name.capitalize %> Student</legend>
+			<%= student_form.input :first_name %>
+			<%= student_form.input :last_name %>
+			<%= student_form.input :date_of_birth, :label => "Date of Birth", :as => :date, :start_year => Date.today.year - 4, :end_year => Date.today.year - 75, :order => [:month, :day, :year], :include_blank => true %>
+			<%= student_form.input :phone %>
+			<% if logged_in? && (current_user.role? :admin) %>		<!-- admin only: -->
+				<%= student_form.input :rank, :collection => Student::RANKS %>
+				<%= student_form.input :waiver_signed %>
+				<%= student_form.input :active %>
+			<% end %>
+
+		</fieldset>
+	</div>
+
+	<div class="span5">
+	<legend>User (Optional)</legend>
+		<div id="user_email">
+			<%= student_form.simple_fields_for :user do |user_form| %>
+				<%= user_form.input :email %>
+				<% if logged_in? && (current_user.role? :admin) %>	<!-- admin only: -->
+					<%= user_form.input :password %>
+					<%= user_form.input :password_confirmation %>
+					<%= user_form.input :role, :collection => User::ROLES, :prompt => "Select..." %>
+					<%= user_form.input :active %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="span1">
+		&nbsp;
+	</div>
+</div>
+
+<div class="form-actions">
+    <%= student_form.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', students_path, :class => 'btn' %>
+</div>
+<% end %>

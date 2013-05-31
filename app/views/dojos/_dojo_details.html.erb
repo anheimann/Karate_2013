@@ -1,0 +1,31 @@
+<div class="well3">
+	<h3>Dojo Details</h3>
+
+	<p>
+	<!-- changed from:  <h4>Name: <%= @dojo.name %></h4>    to:-->
+	<b>Name:</b> <%= @dojo.name %></p>
+	
+	<p><b>Address:</b> <%= @dojo.street %></p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		<%= @dojo.city %>, <%= @dojo.state %> <%= @dojo.zip %></p>
+	
+	<!--	<p><b>Active:</b> <%= @dojo.active ? "Yes" : "No" %></p>		-->
+	<br>
+</div>
+	
+	<!-- alternative presentation style: 
+	<table>
+		<tr><td width="60"><b>Name:</b></td>
+			<td><%= @dojo.name %></td></tr>
+		<tr><td><b>Street:</b></td>
+			<td><%= @dojo.street %></td></tr>
+		<tr><td><b>City:</b></td>
+			<td><%= @dojo.city %>, &nbsp;
+				<%= @dojo.state %></td>&nbsp;
+			<td><%= @dojo.zip %></td></tr>
+	</table>														-->
+	
+	<br>
+	<%= image_tag Dojo.create_map_link([@dojo], zoom=13,width=400,height=400) %>
+	

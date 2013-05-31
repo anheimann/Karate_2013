@@ -1,0 +1,29 @@
+<h3>Registered Students</h3>
+
+<% if @tournament_students.empty? %>
+	<p><em>No student registrations for this tournament currently in the system.</em></p>
+<% else %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th class="centered">Age</th>
+				<th class="centered">Rank</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @tournament_students.each do |student| %>
+            <tr>
+				<td><%= link_to student.name, student_path(student) %></td>
+				<td><%= student.age %></td>
+				<td><%= rank_name(student.rank) %></td>
+			</tr>
+		  <% end %>
+		</tbody>
+	</table>
+
+	<div class="digg_pagination">
+	<!--	<div class="page_info"><%= page_entries_info @tournament_students %></div>		-->
+		<%= will_paginate @tournament_students, :container => true, :previous_label => "Previous", :next_label => "Next", :inner_window => 2 %>
+	</div>
+<% end %>

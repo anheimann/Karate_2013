@@ -1,0 +1,14 @@
+<div class="nav-collapse">
+	<%= link_to(raw("<em>A&M KARATE&nbsp;</em>"), home_path, :class => "brand") %> 
+	<ul class="nav">
+		<li><%= image_tag 'shadow.jpeg', :size => '25x25' %></li>
+		<li><%= link_to "Dojos", dojos_path %></li>
+		<li><%= link_to "Profile", student_path(current_user.student) %></li>
+		<li><%= link_to "Tournaments", tournaments_path %></li>
+	</ul>
+
+	<ul class="nav pull-right">
+	  <li><%# link_to current_user.student.proper_name, student_path(current_user.student) %></li>
+  	<li><%= link_to "Logout", logout_path %></li>
+  </ul>
+</div>

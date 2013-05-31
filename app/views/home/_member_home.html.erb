@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="span12">
+	  <h3>Welcome, <%= role_name(current_user.role) %>&nbsp;<%=current_user.student.proper_name %></h3>
+	  <p>This is the member's page for  A &amp; M Karate Tournaments, hosted by the 
+	    A &amp; M Karate School.</p>
+	</div>
+</div>
+<br />
+
+<!-- below is identical to students/show.html.erb with 1 button added for editing-->
+<div class="row">
+	<div class="span4">
+		<%= render :partial => "member_details" %>
+		<br>
+		<%= render :partial => "/students/dojo_history" %>
+	</div>
+	<div class="span8">
+		<%= render :partial => "/students/eligible_upcoming_sections" %>
+		<br>
+		<%= render :partial => "/students/past_activities" %>
+	</div>
+
+</div>
